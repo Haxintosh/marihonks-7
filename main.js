@@ -414,9 +414,10 @@ function chapter2Stage4(){
 
   bvhExplainTextTween.start();
 }
+let pathHeader;
 // <--- CHAPTER 3. PATH TRACING --->
 function chapter3Stage1(){
-  let pathHeader = new PIXI.Text({
+  pathHeader = new PIXI.Text({
     text: 'Chapter 3. Path Tracing',
     style: {
       fontFamily: 'mplusREGULAR',
@@ -438,7 +439,7 @@ function chapter3Stage1(){
   pathTween.start(); 
 }
 
-function chapter1Stage2(){
+function chapter3Stage2(){
   let cameraFocalPoint = new PIXI.Graphics();
   cameraFocalPoint.circle(0, 0, 10)
   .fill(COL.Peach);
@@ -520,7 +521,6 @@ function chapter1Stage2(){
   .onComplete(() => {
   app.stage.addChild(projection);
   });
-  arrowTween.start();
 
   let inersectArrow1 = new PIXI.Graphics();
   inersectArrow1.moveTo(cameraFocalPoint.x, cameraFocalPoint.y);
@@ -546,7 +546,6 @@ function chapter1Stage2(){
     .fill(COL.Red);
   });
   arrowTween1.start();
-
 
   let intersectArrow2 = new PIXI.Graphics();
   intersectArrow2.moveTo(cameraFocalPoint.x, cameraFocalPoint.y);
@@ -581,7 +580,7 @@ function chapter1Stage2(){
   app.stage.addChild(arrowLineBounce);
 
   let arrowLineBounceTween = new TWEEN.Tween({x:interSectObject.x, y:window.innerHeight/2})
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/2}, 2000)
+  .to({x: (window.innerWidth/4)*1, y: (window.innerHeight/9)*8}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowLineBounce.clear();
@@ -590,23 +589,21 @@ function chapter1Stage2(){
     arrowLineBounce.stroke({width: 5, color: COL.Green});
   });
 
-  arrowLineBounceTween.start();
-
   let arrowTriangleBounce = new PIXI.Graphics();
   arrowTriangleBounce.regularPoly(interSectObject.x, window.innerHeight/2, 20, 3, dToR(90))
   .fill(COL.Green);
   app.stage.addChild(arrowTriangleBounce);
 
   let arrowTriangleBounceTween = new TWEEN.Tween({x:interSectObject.x, y:window.innerHeight/2})
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/2}, 2000)
+  .to({x: (window.innerWidth/4)*1, y: (window.innerHeight/9)*8}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowTriangleBounce.clear();
     arrowTriangleBounce.regularPoly(object.x, object.y, 20, 3, dToR(90))
     .fill(COL.Green);
   });
-
-  arrowTriangleBounceTween.start();
+  arrowLine1Tween.chain(arrowLineBounceTween);
+  arrowTriangle1Tween.chain(arrowTriangleBounceTween);
 
   let arrowLine1 = new PIXI.Graphics();
   arrowLine1.moveTo(cameraFocalPoint.x, cameraFocalPoint.y);
@@ -615,7 +612,7 @@ function chapter1Stage2(){
   app.stage.addChild(arrowLine1);
 
   let arrowLine1Tween = new TWEEN.Tween({x:cameraFocalPoint.x, y:cameraFocalPoint.y})
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/5}, 2000)
+  .to({x: interSectObject.x, y: window.innerHeight/2}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowLine1.clear();
@@ -629,19 +626,17 @@ function chapter1Stage2(){
   .fill(COL.Teal);
   app.stage.addChild(arrowTriangle1);
 
-  let  arrowTriangle1Tween = new TWEEN.Tween({x:interSectObject.x, y:window.innerHeight/2})
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/5}, 2000)
+  let  arrowTriangle1Tween = new TWEEN.Tween({x:cameraFocalPoint.x, y:window.innerHeight/2})
+  .to({x: interSectObject.x, y: window.innerHeight/2}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowTriangle1.clear();
     arrowTriangle1.regularPoly(object.x, object.y, 20, 3, dToR(70))
     .fill(COL.Teal);
   });
-  arrowLine1Tween.start();
-  arrowTriangle1Tween.start();
 
   let arrowLine1BounceTween = new TWEEN.Tween({x:interSectObject.x, y:window.innerHeight/2})
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/2}, 2000)
+  .to({x: (window.innerWidth/4)*1, y: window.innerHeight/7}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowLine1.clear();
@@ -651,20 +646,20 @@ function chapter1Stage2(){
   });
 
   let arrowTriangle1BounceTween = new TWEEN.Tween({x:interSectObject.x, y:window.innerHeight/2})  
-  .to({x: (window.innerWidth/4)*3, y: window.innerHeight/2}, 2000)
+  .to({x:(window.innerWidth/4)*1, y: window.innerHeight/7}, 2000)
   .easing(TWEEN.Easing.Quadratic.Out)
   .onUpdate((object) => {
     arrowTriangle1.clear();
     arrowTriangle1.regularPoly(object.x, object.y, 20, 3, dToR(70))
     .fill(COL.Teal);
   });
-
-  arrowLine1BounceTween.start();
-  arrowTriangle1BounceTween.start();
+  arrowTween1.chain(arrowLine1Tween);
+  arrowTween1.chain(arrowTriangle1Tween);
+  arrowTween1.start();
 }
-let pathText;
 
-function chapter3Stage2(){
+let pathText;
+function chapter3Stage3(){
   pathText = new PIXI.Text({
     text: 'Path tracing is a type of ray tracing.\nRay tracing makes the ray bounces in the scene a number of times, while ray casting is a single bounce.',
     style: {
@@ -681,13 +676,13 @@ function chapter3Stage2(){
   app.stage.addChild(pathText);
 }
 
-function chapter3Stage3(){
-  pathText.text = 'For path tracing, the angle which the ray reflects is random, while for ray tracing, it is determined by the properties of materials in the scene.';
+function chapter3Stage4(){
+  pathText.text = 'For path tracing, the angle which the ray reflects is random, while for ray tracing, it is determined by the properties of materials in the scene and the direction of the incoming rays.';
   pathText.anchor.set(0.5);
   pathText.position.set(window.innerWidth / 5 * 4 -50, window.innerHeight / 2);
 }
 
-function chapter3Stage4(){
+function chapter3Stage5(){
   pathText.text = 'We also take multiple samples (rays) per pixel and sum the results to get a more accurate result.\nThis also acts as a natural anti-aliasing method.';
   pathText.anchor.set(0.5);
   pathText.position.set(window.innerWidth / 5 * 4 -50, window.innerHeight / 2);
@@ -773,6 +768,20 @@ function handleChapterClick() {
         takeOut(child);
       });
       chapter3Stage1();
+    } else if (click === 2) {
+      takeOut(pathHeader);
+      chapter3Stage2();
+    } else if (click === 3) {
+      chapter3Stage3();
+    } else if (click === 4) {
+      chapter3Stage4();
+    } else if (click === 5) {
+      chapter3Stage5();
+    } else if (click === 6) {
+      app.stage.children.forEach((child) => {
+        takeOut(child);
+      });
+      window.location.replace("https://suiryuunin.github.io/RayTracer/");
     }
   }
   click++;
