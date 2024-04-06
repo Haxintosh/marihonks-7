@@ -1,6 +1,6 @@
 import './style.css'
 import * as THREE from 'three';
-import { ParallelMeshBVHWorker } from 'three-mesh-bvh/src/workers/ParallelMeshBVHWorker.js';
+// import { ParallelMeshBVHWorker } from 'three-mesh-bvh/src/workers/ParallelMeshBVHWorker.js';
 import { WebGLPathTracer } from './pathTracer/core/WebGLPathTracer.js';
 
 const scene = new THREE.Scene();
@@ -14,18 +14,14 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 const pathTracer = new WebGLPathTracer(renderer);
 pathTracer.tiles.set(2);
 pathTracer.renderScale = Math.max(1 / window.devicePixelRatio, 0.5);
-pathTracer.setBVHWorker(new ParallelMeshBVHWorker());
 
-await pathTracer.setSceneAsync( scene, camera, {
-  onProgress: v => console.log(v),
-} );
-
+pathTracer.setScene(scene, camera);
 animate();
 function animate() {
   requestAnimationFrame(animate);
   pathTracer.renderSample();
+  
 }
-
 
 
 // // Create a scene
