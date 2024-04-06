@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^23.1.1",
+    "mathjax": "^3.2.2",
     "pixi.js": "^8.0.5",
     "pixijs-grid": "^0.4.1",
     "three": "^0.163.0",

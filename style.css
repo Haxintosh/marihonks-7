@@ -2,6 +2,41 @@
   margin: 0;
   overflow: hidden;
 }
+
+canvas {
+  display: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.mathjax {
+  z-index: 10;
+  position: absolute;
+  top: 100;
+  left: 100;
+  background-color: transparent;
+  font-size: 40px;
+  visibility: hidden;
+}
+
+#rayForm {
+  position: absolute;
+  top: 10%;
+  left : 80%;
+}
+
+#rayForm2 {
+  position: absolute;
+  top: 10%;
+  left : 80%;
+}
+
+#rayForm3 {
+  position: absolute;
+  top: 10%;
+  left : 80%;
+}
 /* 
 .header {
   display: flex;
@@ -31,3 +66,7 @@
   color: #000;
   padding: 35px 20px;
 } */
+
+div {
+  transition: opacity 0.5s;
+}
