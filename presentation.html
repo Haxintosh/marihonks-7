@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="rayForm" class="mathjax">
+      \[{\color{#89b4fa}X = X_{0} + t \cdot{} D_{x}}\]
+      <br>
+      \[{\color{#89b4fa}Y = Y_{0} + t \cdot{} D_{y}}\]
+      <br>
+      \[{\color{#89b4fa}Z = Z_{0} + t \cdot{} D_{z}}\]
+    </div>
+    <div id="rayForm2" class="mathjax">
+      \[{\color{#89b4fa}\vec{v} = x - p_{0}}\]
+      <br>
+      \[{\color{#89b4fa}\text{Distance} = \frac{|\vec{v} \cdot n |}{|n|}}\]
+    </div>
+    <div id="rayForm3" class="mathjax">
+      \[{\color{#89b4fa}t = -\frac{n\cdot(x-p_{0})}{n\cdot D}}\]
+    </div>
+        <!-- <header class="header">
+      <a href="#" class="logo">MariHacks 2024</a>
+      <nav class="nav-items">
+        <a href="#">Check out our source code on GitHub</a>
+      </nav>
+    </header> -->
+    <script type="module" src="/main.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      MathJax = {
+        loader: {load: ['[tex]/color']},
+        tex: {
+          inlineMath: [['\\[','\\]']],
+          displayMath: [['\\(','\\)']],
+          packages: {'[+]': ['color']},
+        },
+      };
+    </script>
+  </body>
+</html>
